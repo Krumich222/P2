@@ -33,10 +33,6 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
-	//Add code here to access the #slideShow element.
-	//Access the img element and replace its source
-	//with a new image from your images array which is loaded
-	//from the JSON string
   if (mCurrentIndex >=mImages.length)
   {
     mCurrentIndex=0;
@@ -45,18 +41,33 @@ function swapPhoto() {
   if(mCurrentIndex <0){
     mCurrentIndex= mImages.length-1;
   }
-document.getElementById('photo').src mImages[mCurrentIndex].img;
-var loc= document.getElementByClassName('location');
+document.getElementsById('photo').src mImages[mCurrentIndex].img;
+var loc= document.getElementsByClassName('location');
 loc[0].innerHTML= "Location: " + mImages[mCurrentIndex].location;
-var des= document.getElementByClassName('description');
+var des= document.getElementsByClassName('description');
 des[0].innerHTML= "Description: "+ mImages[mCurrentIndex].description;
-var dt= document.getElementByClassName ('date');
+var dt= document.getElementsByClassName ('date');
+dt[0]innerHTML= "Date: "+ mImages[mCurrentIndex].date;
+var des= document.getElemensByClassName('description');
+des[0].innerHTML= "Description: "+ mImages[mCurrentIndex].description;
+var dt= document.getElementsByClassName ('date');
 dt[0]innerHTML= "Date: "+ mImages[mCurrentIndex].date;
 
 mLastFrameTime=0;
-mCurrentIndex +=1;
+ mCurrentIndex +=1;
 }
-
+function toggleDetails()
+{
+  if($(".moreIndicator").hasClass("rot90"))
+  {
+    if($(".moreIndicator").removeClass("rot90"))
+    if($(".moreIndicator").addClass("rot270"))
+  }
+  else{
+    if($(".moreIndicator").removeClass("rot270"))
+    if($(".moreIndicator").addClass("rot90"))
+  }
+}
 
 // Counter for the mImages array
 var mCurrentIndex = 0;
@@ -72,9 +83,11 @@ var mJson;
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = 'images.json';
+var mUrl;
 
 //PART 2 SLIDESHOW 1 & 2
+
+
 function fetchJSON()
 {
   mRequest.onreadystatechange=function() {
@@ -108,20 +121,6 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 		mImages.push(galleryImage);
 	}
 }
-
-$(document).ready( function() {
-
-	// This initially hides the photos' metadata information
-	//$('.details').eq(0).hide();
-
-});
-
-window.addEventListener('load', function() {
-
-	console.log('window loaded');
-
-}, false);
-
 function GalleryImage() {
 	//implement me as an object to hold the following data about an image:
 	//1. location where photo was taken
@@ -133,3 +132,18 @@ function GalleryImage() {
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
   var img;
 }
+$(document).ready( function() {
+$("nextPhoto").position({
+  my:"right bottom",
+  at:"right bottom",
+  of:"#nav"
+});
+
+
+
+
+window.addEventListener('load', function() {
+
+	console.log('window loaded');
+
+}, false);
